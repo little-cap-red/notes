@@ -1,0 +1,39 @@
+IDEA教程  https://github.com/judasn/IntelliJ-IDEA-Tutorial
+idea JRebel破解  https://blog.csdn.net/lsgqjh/article/details/52848172
+
+git book  https://git-scm.com/book/zh/v2
+
+shiro教程 https://www.cnblogs.com/learnhow/p/5694876.html
+开涛学shiro http://jinnianshilongnian.iteye.com/blog/2019547
+shiro源码分析：https://blog.csdn.net/xtayfjpk
+https://blog.csdn.net/conansonic/article/category/5913767
+
+spring data jpa http://sharong.iteye.com/blog/2342164
+
+排序算法 http://mp.weixin.qq.com/s?__biz=MzU0OTE4MzYzMw==&mid=2247484593&idx=1&sn=eee37eef283a5e2cee8fbd53aaf00988&chksm=fbb28d4fccc50459c5292f7a2f3b12af6120533ca83df9b32a7264f1147ea62a3ae98ba468a9&mpshare=1&scene=23&srcid=0323ikJh4rUDtPRz29EtIVxu#rd
+
+JUC包简介 https://blog.csdn.net/u013080921/article/details/42922409
+
+
+
+学完MySql需要看的一个项目：https://www.sojson.com/shiro
+
+
+设计模式:
+http://www.cnblogs.com/zuoxiaolong/p/pattern26.html
+
+JVM:
+http://www.cnblogs.com/zuoxiaolong/category/508918.html
+
+
+并发编程实战，tcp/ip详解，深入理解java虚拟机
+
+
+算法课程
+https://study.163.com/forum/index.htm?cid=1002942008&p=1
+
+IDEA debug 详细用法讲解
+https://mp.weixin.qq.com/s/3H5VsZu-pNb_b8vJHFmIGg
+
+explain命令详解
+https://www.cnblogs.com/gomysql/p/3720123.html
