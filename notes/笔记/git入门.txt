@@ -36,6 +36,9 @@ git远程应用:
 
 
 
+提交远程时，需要先将本地和github关联起来：
+git remote add origin git@github.com:little-cap-red/gupao.git 将本地项目与github上新建的项目关联起来
+
 ==============================
 git学习笔记
 Git 是一款免费、开源的分布式版本控制系统
