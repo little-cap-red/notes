@@ -1,0 +1,14 @@
+idea快捷键：
+Ctrl+N : 根据类名查找
+Ctrl+D ：复制当前行
+Ctrl+O ：重写父类方法
+Ctrl+I : 实现接口方法
+Ctrl+Y : 删除当前行
+Ctrl+B : 打开光标处的类或者方法
+
+Alt + up/down : 跳到上/下一个方法  
+
+Ctrl+Alt+H ：
+Ctrl+Fn+F7 ： 
+
+Shift + Alt + Insert 选中矩形区域

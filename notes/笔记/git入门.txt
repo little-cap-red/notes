@@ -1,0 +1,70 @@
+﻿git的基本使用：
+1.新建文件夹,执行git init命令,让该目录变成git仓库被git管理
+2.git status 查询当前仓库的状态
+3.git add a.txt 将文件a.txt放入暂存区
+4.git rm --cached  a.txt  从暂存区中删除a.txt
+5.git commit -m "备注信息"  将暂存区中的文件提交到git上去
+6.git config --global user.email "you@example.com"  设置邮箱和用户名
+  git config --global user.name "Your Name"
+7.git log 查看产生commit的记录
+8.git branch 查看分支情况
+  git branch xxx  创建一个分支,xxx即为创建分支的名称
+  git branch -d xxx 删除已经创建的分支xxx(如果xxx有未合并的内容会报错)
+  git branch -D xxx 强制删除已经创建的分支xxx
+9.git checkout xxx 切换到分支xxx上
+  git checkout -b xxx 新建一个分支xxx,并且换到xxx分支上
+  git checkout xxx 丢弃xxx,xxx为文件名且未加到暂存区。
+10.在master分支上执行 git merge xxx 将分支xxx上的代码合并到master上来
+11.git tag v1.1 给当前代码打标签
+   git tag 查看所有的标签
+   git checkout v1.1 切换到v1.1标签当时的代码
+   
+git远程应用:
+1.输入ssh检测电脑是否按装SSH
+2.ssh-keygen -t rsa  指定rsa算法生成秘钥。接着三个连续回车,会生成id_rsa和id_rsa.pub 2个文件
+  Linux/Mac 系统 在 ~/.ssh 下，win系统在 /c/Documents and Settings/username/.ssh 下
+  C:\Documents and Settings\Administrator\.ssh
+3.将公钥的内容添加到github上
+  GitHub-->Settings-->SSH and GPG keys-->new SSH Key 将公钥的内容复制到key中,title不用填
+  ssh -T git@github.com 测试是否连上github
+4.git clone git@github.com/github用户名称/项目名称  将github上的项目下载到本地
+5.git push origin master  向github上提交代码
+6.将本地项目转移到github上
+  在github上创建一个项目xxx
+  git remote add origin git@github.com/github用户名称/xxx
+7.git remote -v 查看当前项目可以提交到哪些远程仓库  
+
+
+
+==============================
+git学习笔记
+Git 是一款免费、开源的分布式版本控制系统
+github 基于git管理版本控制的网站
+
+git init :将当前目录作为git 仓库
+git status :查看git 仓库的当前状态
+git add 加文件名称或者点.  将对于的文件加入缓冲区(点代表当前目录下的所以文件)
+git commit -m "描述信息" ：将缓冲区的内容提交到git，-m 后面是备注信息
+git log : 查看commit的记录
+git branch ：查看当前的分支情况(有那些分支)，带* 号的是当前所处的分支
+git branch 分支名称 : 创建一个分支，后面跟的是分支名称
+git checkout 分支名称 ： 切换到对应的分支上去 
+git branch -d 分支名称 ：删除对应的分支
+git branch -D 分支名称 ：删除对应的分支，强制删除(如果有未合并的内容)
+git merge 分支名称 ： 将对应分支的代码合并打主干上来,需要切换到主干上去，然后再执行该命令
+
+想要将本地的git代码提交到github上需要配置ssh key
+
+设置用户名和邮箱
+git config --global user.name "stormzhang" 
+git config --global user.email "stormzhang.dev@gmail.com"
+
+git push origin master 将本地代码上传到guthub上
+git pull origin master 将远程github上更新的代码下载到本地
+
+git clone git@github.com:little-cap-red/gupao.git 将github上的项目下载到本地(clone跟的是具体的项目地址)
+如果本地有项目;
+git remote add origin git@github.com:little-cap-red/gupao.git 将本地项目与github上新建的项目关联起来
+
+
+

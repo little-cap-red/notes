@@ -1,0 +1,26 @@
+jxls导入导出
+导入：
+	通过xml方式配置。后台通过request流获取导入的excel文件
+	MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+    MultipartFile multipartFile = multipartRequest.getFile("file");
+	具体参考代码：DeclImportServiceImpl 的 importFile2007()方法
+		或   	  AccountBookController 的 importFile()方法
+	
+导出：
+	模板中批注方式
+	第一行批注：jx:area(lastCell=”AU24”)
+	如果需要多模板导出需要再循环中加multisheet属性。循环的list可以自己造
+	jx:area(lastCell=”AU24”)
+	jx:each(items="declHeads" var="head" lastCell="AU24" multisheet="sheetNames")
+
+	当一个页签有多模板时：
+	只需要在每个模板的开头写一个循环批注就行：jx:each(items="goodsDTOs" var="goods" lastCell="AU23")
+	
+	当多sheet时，每个sheet的模板都一样，网上百度一大堆。
+	当多sheet，且每个sheet的模板都不一样时，查询数据把每个sheet的list数据放入map中，在每个sheet(除第一个sheet)的
+	写发都和单sheet一样
+	
+	当为多sheet取名字时，只需要将名字放入sheetNames中，在第一个页签遍历时会根据顺序生成多个sheet,并指定名字
+
+
+	

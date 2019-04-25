@@ -1,0 +1,28 @@
+FileSystemXmlApplicationContext IOC容器的启动流程:
+1.设置资源加载器
+  在FileSystemXmlApplicationContext的构造函数中调用super(parent)方法。设置资源加载器。
+  实际上是调用AbstractApplicationContext中的方法，最终在PathMatchingResourcePatternResolver中获取资源加载器
+2.定位资源
+  在FileSystemXmlApplicationContext的构造函数中调用setConfigLocations(configLocations)方法，定位配置文件位置。
+  实际上是调用AbstractRefreshableConfigApplicationContext的setConfigLocations(String location)方法
+3.载入xml
+  在FileSystemXmlApplicationContext的构造函数中调用refresh()方法，载入xml文件，
+  实际上是调用AbstractApplicationContext的refresh()方法启动整个IOC容器对xml的载入过程。
+  
+  在AbstractXmlApplicationContext中调用loadBeanDefinitions(beanDefinitionReader)进行载入。
+  最后到XmlBeanDefinitionReader中的doLoadBeanDefinitions()进行真正的载入
+  
+  DocumentLoader将xml转成Document对象
+  调用registerBeanDefinition方法启动IOC容器对xml的解析过程
+  在DefaultBeanDefinitionDocumentReader中对Document对象进行解析(这里只解析<import><alias>标签)
+  由BeanDefinitionParserDelegate的 parseBeanDefinitionElement方法和 parseBeanDefinitionElement方法来解析<bean>标签
+  由BeanDefinitionParserDelegate的 parsePropertyElements方法来解析<bean>标签的子标签<property>标签
+  
+  
+  
+https://github.com/Snailclimb/JavaGuide  
+
+https://www.javadoop.com/#best-practice
+spring-IOC 详解： https://javadoop.com/post/spring-ioc?tdsourcetag=s_pctim_aiomsg   
+aspectj： https://www.javadoop.com/post/aspectj
+  

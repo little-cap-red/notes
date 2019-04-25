@@ -1,0 +1,3 @@
+BeanUtils.copyProperties(A,B)
+在spring中是将A中同名字段的值赋值给B
+在apache包中则正好相反

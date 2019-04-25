@@ -1,0 +1,39 @@
+﻿https://www.cnblogs.com/hechunhua/p/3690898.html   MySQL日期时间函数大全
+https://blog.csdn.net/qq_33390789/article/details/68060657    Ztree设置权限管理时显示树形菜单
+
+
+http://www.cnblogs.com/rulian/p/6533109.html  
+https://hacpai.com/article/1514726612565   hashMap源码分析
+https://hacpai.com/member/stateis0/articles?p=2 必看的博客
+
+
+链接：https://pan.baidu.com/s/17KtfvrH38oHTk73GCj1vZw 密码：wulx
+
+
+
+ASE256解密是报错,java.security.InvalidKeyException: Illegal key size or default parameters
+https://blog.csdn.net/dafeige8/article/details/76019911
+
+访问参数含json字符串时报400
+修改conf/catalina.properties
+
+
+值得仔细研读：  https://www.javadoop.com/#best-practice
+spring-IOC 详解： https://javadoop.com/post/spring-ioc?tdsourcetag=s_pctim_aiomsg   
+aspectj： https://www.javadoop.com/post/aspectj
+
+小马哥微服务视频：
+https://www.bilibili.com/video/av35951848/p=15
+
+mysql慢查询：
+https://www.cnblogs.com/saneri/p/6656161.html
+
+B树及区别：
+https://blog.csdn.net/zwz2011303359/article/details/63262541
+
+webservice入门：
+https://www.imooc.com/article/25537?block_id=tuijian_wz&tdsourcetag=s_pctim_aiomsg
+
+
+编码详解：https://www.cnblogs.com/happyday56/p/4135845.html
+  

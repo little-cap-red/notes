@@ -1,0 +1,139 @@
+https://blog.csdn.net/qazwyc/article/details/76686915  hashMap源码分析
+HashMap的put(k,v)方法
+hash : key的hash值
+	final V putVal(int hash, K key, V value, boolean onlyIfAbsent,boolean evict) {
+        Node<K,V>[] tab; //hashMap底层的数组+链表结构
+		Node<K,V> p; //记录要插入位置的元素(老元素)
+		int n, i;  //n 数组的长度, i是要插入位置的下标
+        if ((tab = table) == null || (n = tab.length) == 0)  //如果hashMap为空，扩容，默认的扩容大小为16
+            n = (tab = resize()).length;     // 扩容方法 resize()  ①
+		//(n - 1) & hash 确保数组的下标不会越界 ,tab[i] 判断当前位置是否有元素(是否发生碰撞) 
+        if ((p = tab[i = (n - 1) & hash]) == null)   
+            tab[i] = newNode(hash, key, value, null); //如果没碰撞，直接把要插入的值插入到当前位置
+        else { //发生碰撞就要产生链表结构
+            Node<K,V> e; K k;
+            if (p.hash == hash &&((k = p.key) == key || (key != null && key.equals(k))))  
+                e = p;  //如果该位置(数组上)已经存在相同的key,准备把旧值的value返回
+            else if (p instanceof TreeNode) //如果是数形结构(说明已经转换成红黑树)
+                e = ((TreeNode<K,V>)p).putTreeVal(this, tab, hash, key, value);  //往树中添加元素 ②
+            else { //发生碰撞且不存在相同的key,也没有形成红黑树(链表长度小于8),那么就把值插入链表尾部
+                for (int binCount = 0; ; ++binCount) {  //遍历链表
+                    if ((e = p.next) == null) {  //说明到了链表末尾
+                        p.next = newNode(hash, key, value, null); //将让插入的值加到链表末尾
+                        if (binCount >= TREEIFY_THRESHOLD - 1) //链表长度大于等于8,转换成红黑树  ③
+                            treeifyBin(tab, hash);
+                        break;
+                    }
+					//如果在链表中存在相同的key,准备把旧值的value返回
+                    if (e.hash == hash && ((k = e.key) == key || (key != null && key.equals(k)))) break;
+                    p = e;
+                }
+            }
+			//返回旧的value值
+            if (e != null) { // existing mapping for key
+                V oldValue = e.value;
+                if (!onlyIfAbsent || oldValue == null)
+                    e.value = value;
+                afterNodeAccess(e);
+                return oldValue;
+            }
+        }
+		//HashMap的修改次数。fail-fast策略。
+		//在使用迭代器遍历hashMap时，会比较这个值，如果和迭代器中的不一样。
+		//说明在迭代过程中有其他线程修改了hashmap，会抛出异常
+        ++modCount; 
+        if (++size > threshold)  //如果hashmap的元素个数大于阈值，则执行扩容操作
+            resize();
+        afterNodeInsertion(evict); 
+        return null;
+    }
+	
+	思考：下面2个方法的作用？
+	afterNodeAccess(e):
+	afterNodeInsertion(evict): 
+	
+HashMap的resize()方法	
+    final Node<K,V>[] resize() {
+        Node<K,V>[] oldTab = table; //扩容前的数据
+        int oldCap = (oldTab == null) ? 0 : oldTab.length; //数组长度
+        int oldThr = threshold; //阈值
+        int newCap, newThr = 0;
+        if (oldCap > 0) {
+            if (oldCap >= MAXIMUM_CAPACITY) {  //已经到达最大值，不能再扩容了
+                threshold = Integer.MAX_VALUE;
+                return oldTab;
+            } else if ((newCap = oldCap << 1) < MAXIMUM_CAPACITY && oldCap >= DEFAULT_INITIAL_CAPACITY)
+                newThr = oldThr << 1; // double threshold  满足扩容条件。阈值和数组长度扩大2倍
+        }else if (oldThr > 0) // initial capacity was placed in threshold
+            newCap = oldThr;
+        else {               // zero initial threshold signifies using defaults
+            newCap = DEFAULT_INITIAL_CAPACITY;
+            newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
+        }
+        if (newThr == 0) {
+            float ft = (float)newCap * loadFactor;
+            newThr = (newCap < MAXIMUM_CAPACITY && ft < (float)MAXIMUM_CAPACITY ? (int)ft : Integer.MAX_VALUE);
+        }
+        threshold = newThr;
+        @SuppressWarnings({"rawtypes","unchecked"})
+        Node<K,V>[] newTab = (Node<K,V>[])new Node[newCap];
+        table = newTab;
+        if (oldTab != null) {
+            for (int j = 0; j < oldCap; ++j) {  //将旧hashmap的元素复制到新的hashmap中
+                Node<K,V> e;
+                if ((e = oldTab[j]) != null) {  
+                    oldTab[j] = null;
+                    if (e.next == null)  //该位置就一个元素，没有发生碰撞，重新计算在新map中的下标
+                        newTab[e.hash & (newCap - 1)] = e;
+                    else if (e instanceof TreeNode) //如果是红黑树  ①
+                        ((TreeNode<K,V>)e).split(this, newTab, j, oldCap);
+                    else { // preserve order
+                        Node<K,V> loHead = null, loTail = null;
+                        Node<K,V> hiHead = null, hiTail = null;
+                        Node<K,V> next;
+                        do {
+                            next = e.next;
+                            if ((e.hash & oldCap) == 0) {   //e.hash & oldCap  新的元素要么在原位置，要么在原下标+ 扩容前长度
+                                if (loTail == null)
+                                    loHead = e;
+                                else
+                                    loTail.next = e;
+                                loTail = e;
+                            }
+                            else {
+                                if (hiTail == null)
+                                    hiHead = e;
+                                else
+                                    hiTail.next = e;
+                                hiTail = e;
+                            }
+                        } while ((e = next) != null);
+                        if (loTail != null) {
+                            loTail.next = null;
+                            newTab[j] = loHead;
+                        }
+                        if (hiTail != null) {
+                            hiTail.next = null;
+                            newTab[j + oldCap] = hiHead;
+                        }
+                    }
+                }
+            }
+        }
+        return newTab;
+    }
+
+	static final int tableSizeFor(int cap) {   // 31
+        int n = cap - 1;  //31 
+        n |= n >>> 1;
+        n |= n >>> 2;
+        n |= n >>> 4;
+        n |= n >>> 8;
+        n |= n >>> 16;
+        return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
+    }
+
+	
+	
+	
+	

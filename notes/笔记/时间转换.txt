@@ -1,0 +1,37 @@
+﻿//时间戳转成年月日时分秒格式
+public String getYMDHMS(long timetemp) {
+    Calendar calendar=Calendar.getInstance();
+    calendar.setTimeInMillis(timetemp);
+    SimpleDateFormat fmat=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    String time=fmat.format(calendar.getTime());
+    return time;
+}
+String date = getYMDHMS(Long.parseLong(applyTime));
+Timestamp d3 = Timestamp.valueOf(date);
+
+
+把科学计数法显示出全部数字
+public BigDecimal toBigdecimal(BigDecimal d) {
+    if (StringHelper.isEmpty(d + "")) {
+        return BigDecimal.ZERO;
+    }
+    NumberFormat nf = NumberFormat.getInstance();
+    nf.setMaximumFractionDigits(9); //转换后的数字保留几位小数，默认是3位
+    return new BigDecimal(nf.format(d).replaceAll(",",""));
+}
+
+  当前日期的下一天
+  public Long getNextDayStart(Long time){
+        Date date = new Date(time);
+        Calendar calendar = Calendar.getInstance(); //得到日历
+        calendar.setTime(date);//把当前时间赋给日历
+
+        calendar.add(Calendar.DAY_OF_MONTH, 1); //设置为后一天
+        Date dBefore = calendar.getTime(); //得到后一天的时间
+
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd"); //设置时间格式
+        String defaultStartDate = sdf.format(dBefore); //格式化后一天
+        defaultStartDate = defaultStartDate+" 00:00:00";
+        Timestamp ts = Timestamp.valueOf(defaultStartDate);
+        return  ts.getTime();
+    }

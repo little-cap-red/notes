@@ -1,0 +1,4 @@
+如果在工具类中无法通过@Autowared,@Resource等来注入bean时(得到的bean为null)，可以通过上下文获取bean:
+ WebApplicationContext wac = ContextLoader.getCurrentWebApplicationContext();
+ baseDataInfoService = (BaseDataInfoService) wac.getBean("baseDataInfoServiceImpl");
+ 注意根据bean的名称来获取bean的时候，名称应该是实现类(子类)的名称。默认首字母小写

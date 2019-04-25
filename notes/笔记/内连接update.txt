@@ -1,0 +1,5 @@
+按照b表的对应关系给A表的对应字段赋值
+update aaaaaaa a inner join bbbbbbb  b on b.name=a.name set a.value=b.value; 
+
+一个表的某个字段的值赋值给另一个字段
+update aaaaaaa a INNER JOIN aaaaaaa b on a.`name` = b.`name`  set b.xx= SUBSTR(a.name, 3);
