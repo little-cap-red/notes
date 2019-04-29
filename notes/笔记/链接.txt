@@ -37,3 +37,6 @@ https://mp.weixin.qq.com/s/3H5VsZu-pNb_b8vJHFmIGg
 
 explain命令详解
 https://www.cnblogs.com/gomysql/p/3720123.html
+
+定时任务表达式：
+https://www.cnblogs.com/pipi-changing/p/5697481.html

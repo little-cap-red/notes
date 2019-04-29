@@ -1,3 +1,6 @@
+﻿sql执行顺序:
+from  on   join   where  group by having  select  distinct  order by  limit 
+
 SQL语句执行过程详解
 一条sql，plsql的执行到底是怎样执行的呢？
 一、SQL语句执行原理：
