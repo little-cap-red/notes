@@ -44,6 +44,9 @@ https://www.cnblogs.com/pipi-changing/p/5697481.html
 查看JAVA进程中哪个线程CPU消耗最高
 http://www.cnblogs.com/tankaixiong/p/5984023.html
 
+23种设计模式全解：
+https://www.cnblogs.com/geek6/p/3951677.html
+
 
 
 
